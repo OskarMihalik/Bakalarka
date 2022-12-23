@@ -36,6 +36,11 @@ using M2MqttUnity;
 /// </summary>
 namespace M2MqttUnity.Examples
 {
+    [Serializable]
+    public class Message
+    {
+        public bool manualControl;
+    }
     /// <summary>
     /// Script for testing M2MQTT with a Unity UI
     /// </summary>
@@ -43,7 +48,8 @@ namespace M2MqttUnity.Examples
     {
         [Tooltip("Set this to true to perform a testing cycle automatically on startup")]
         public bool autoTest = false;
-        [Header("User Interface")]
+
+        [Header("User Interface")] public String topic;
         public InputField consoleInputField;
         public Toggle encryptedToggle;
         public InputField addressInputField;
@@ -58,7 +64,8 @@ namespace M2MqttUnity.Examples
 
         public void TestPublish()
         {
-            client.Publish("M2MQTT_Unity/test", System.Text.Encoding.UTF8.GetBytes("Test message"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            var payload = new Message{manualControl = false};
+            client.Publish("Initialize_values", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(payload)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             Debug.Log("Test message published");
             AddUiMessage("Test message published.");
         }
@@ -122,12 +129,12 @@ namespace M2MqttUnity.Examples
 
         protected override void SubscribeTopics()
         {
-            client.Subscribe(new string[] { "M2MQTT_Unity/test" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            client.Subscribe(new string[] { "Initialize_values" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
         }
 
         protected override void UnsubscribeTopics()
         {
-            client.Unsubscribe(new string[] { "M2MQTT_Unity/test" });
+            client.Unsubscribe(new string[] { "Initialize_values" });
         }
 
         protected override void OnConnectionFailed(string errorMessage)
@@ -205,7 +212,7 @@ namespace M2MqttUnity.Examples
             string msg = System.Text.Encoding.UTF8.GetString(message);
             Debug.Log("Received: " + msg);
             StoreMessage(msg);
-            if (topic == "M2MQTT_Unity/test")
+            if (topic == "Initialize_values")
             {
                 if (autoTest)
                 {
