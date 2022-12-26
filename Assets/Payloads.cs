@@ -6,16 +6,19 @@ public static class Topics
 {
     public static readonly string InitializeValues = "Initialize_values";
     public static readonly string ManualControl = "Manual_control";
+    public static readonly string ResetAlarms = "Reset_alarms";
+    public static readonly string Start = "Start";
+    public static readonly string SwitchControl = "Switch_control";
 }
 
 [Serializable]
-public class InitializeValues
+public class InitializeValuesPayload
 {
     
 }
 
 [Serializable]
-public class ManualControl 
+public class ManualControlPayload
 {
     public bool line1;
     public bool line2;
@@ -27,6 +30,12 @@ public class ManualControl
     public bool slider1Back;
     public bool slider2Forward;
     public bool slider2Back;
+}
+
+[Serializable]
+public class ResetAlarmsPayload
+{
+    public bool reset_alarm;
 }
 
 

@@ -32,7 +32,7 @@ public class M2MqttManager : M2MqttUnityClient
     protected override void DecodeMessage(string topic, byte[] message)
     {
         string msg = System.Text.Encoding.UTF8.GetString(message);
-        Debug.Log("Received: " + msg);
+        Debug.Log("DecodeMessage: " + msg);
         StoreMessage(msg);
     }
 
@@ -43,7 +43,7 @@ public class M2MqttManager : M2MqttUnityClient
     
     private void ProcessMessage(string msg)
     {
-        Debug.Log("Received: " + msg);
+        Debug.Log("ProcessMessage: " + msg);
     }
     
     protected override void OnConnecting()
@@ -61,12 +61,21 @@ public class M2MqttManager : M2MqttUnityClient
 
     protected override void SubscribeTopics()
     {
-        client.Subscribe(new string[] { Topics.ManualControl, Topics.InitializeValues }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+        client.Subscribe(
+            new string[]
+                {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl},
+            new byte[]
+            {
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
+            });
+        
     }
 
     protected override void UnsubscribeTopics()
     {
-        client.Unsubscribe(new string[] { Topics.ManualControl, Topics.InitializeValues });
+        client.Unsubscribe(new string[] { Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl });
     }
 
     protected override void OnConnectionFailed(string errorMessage)
