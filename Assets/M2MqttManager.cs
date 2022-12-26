@@ -8,27 +8,28 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 public class M2MqttManager : M2MqttUnityClient
 {
     private List<string> eventMessages = new List<string>();
-    
-    public void PublishPayload(string topic , string payload)
+
+    public void PublishPayload(string topic, string payload)
     {
         client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload),
             MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
         Debug.Log("message published");
     }
-    
+
     protected override void Update()
     {
         base.Update(); // call ProcessMqttEvents()
 
         if (eventMessages.Count <= 0) return;
-        
+
         foreach (var msg in eventMessages)
         {
             ProcessMessage(msg);
         }
+
         eventMessages.Clear();
     }
-    
+
     protected override void DecodeMessage(string topic, byte[] message)
     {
         string msg = System.Text.Encoding.UTF8.GetString(message);
@@ -40,12 +41,12 @@ public class M2MqttManager : M2MqttUnityClient
     {
         eventMessages.Add(eventMsg);
     }
-    
+
     private void ProcessMessage(string msg)
     {
         Debug.Log("ProcessMessage: " + msg);
     }
-    
+
     protected override void OnConnecting()
     {
         base.OnConnecting();
@@ -56,7 +57,6 @@ public class M2MqttManager : M2MqttUnityClient
     {
         base.OnConnected();
         Debug.Log("Connected to broker on " + brokerAddress + "\n");
-
     }
 
     protected override void SubscribeTopics()
@@ -70,12 +70,12 @@ public class M2MqttManager : M2MqttUnityClient
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
             });
-        
     }
 
     protected override void UnsubscribeTopics()
     {
-        client.Unsubscribe(new string[] { Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl });
+        client.Unsubscribe(new string[]
+            {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl});
     }
 
     protected override void OnConnectionFailed(string errorMessage)
@@ -92,7 +92,7 @@ public class M2MqttManager : M2MqttUnityClient
     {
         Debug.Log("CONNECTION LOST!");
     }
-    
+
     private void OnDestroy()
     {
         Disconnect();
