@@ -20,16 +20,25 @@ public class InitializeValuesPayload
 [Serializable]
 public class ManualControlPayload
 {
+    public bool slider1_front;
+    public bool slider1_back;
+    public bool slider2_front;
+    public bool slider2_back;
+    public bool LED2;
+    public bool LED3;
+    public bool LED1;
+    public bool LED4;
+    public bool LED5;
+    public bool slider1_go_forward;
+    public bool slider1_go_back;
+    public bool slider2_go_forward;
+    public bool slider2_go_back;
+    public bool machine1;
+    public bool machine2;
     public bool line1;
     public bool line2;
     public bool line3;
     public bool line4;
-    public bool machine1;
-    public bool machine2;
-    public bool slider1Forward;
-    public bool slider1Back;
-    public bool slider2Forward;
-    public bool slider2Back;
 }
 
 [Serializable]
@@ -37,5 +46,6 @@ public class ResetAlarmsPayload
 {
     public bool reset_alarm;
 }
+
 
 
