@@ -7,7 +7,8 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 public class M2MqttManager : M2MqttUnityClient
 {
-    private List<string> eventMessages = new List<string>();
+    private List<StoredMessage> eventMessages = new List<StoredMessage>();
+    private Dictionary<string, Action> eventActions = new Dictionary<string, Action>();
 
     public void PublishPayload(string topic, string payload)
     {
@@ -16,6 +17,11 @@ public class M2MqttManager : M2MqttUnityClient
         Debug.Log("message published");
     }
 
+    public void AddActionToReceivedTopic(string topic, Action action)
+    {
+        eventActions.Add(topic, action);
+    }
+    
     protected override void Update()
     {
         base.Update(); // call ProcessMqttEvents()
@@ -34,17 +40,23 @@ public class M2MqttManager : M2MqttUnityClient
     {
         string msg = System.Text.Encoding.UTF8.GetString(message);
         Debug.Log("DecodeMessage: " + msg);
-        StoreMessage(msg);
+        StoreMessage(topic, msg);
     }
 
-    private void StoreMessage(string eventMsg)
+    private void StoreMessage(string topic, string message)
     {
-        eventMessages.Add(eventMsg);
+        eventMessages.Add(new StoredMessage {topic = topic, message = message});
     }
 
-    private void ProcessMessage(string msg)
+    private void ProcessMessage(StoredMessage msg)
     {
-        Debug.Log("ProcessMessage: " + msg);
+        if (eventActions.ContainsKey(msg.topic))
+        {
+            eventActions[msg.topic]();
+            return;
+        }
+        Debug.LogWarning("no registered action with topic: " + msg.topic);
+        
     }
 
     protected override void OnConnecting()

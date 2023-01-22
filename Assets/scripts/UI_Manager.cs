@@ -15,15 +15,18 @@ public class UI_Manager : MonoBehaviour
     public Transform resetAlarmsButton;
     public Transform manualControlButton;
     public Transform startPlanButton;
-    public Transform ManualControlContent;
-
-    public GameObject ListItemPrefab;
+    public Transform manualControlContent;
+    public Transform basicInfoContent;
+    
+    public GameObject listItemPrefab;
+    public GameObject basicInfoRowPrefab;
 
     private void Start()
     {
         // m2MqttManager.Connect();
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
         CreateManualControlButtons();
+        m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
     }
 
     private void OnDestroy()
@@ -33,6 +36,7 @@ public class UI_Manager : MonoBehaviour
 
     private void ConnectionSucceeded()
     {
+        m2MqttPayloads.InitializeValues();
         ToggleControls(true);
     }
 
@@ -44,21 +48,21 @@ public class UI_Manager : MonoBehaviour
     private void ToggleControls(bool toggle)
     {
         // connectButton.GetComponent<Button>().interactable = toggle;
-        resetAlarmsButton.GetComponent<Button>().interactable = toggle;
-        manualControlButton.GetComponent<Button>().interactable = toggle;
-        startPlanButton.GetComponent<Button>().interactable = toggle;
+        resetAlarmsButton.gameObject.SetActive(toggle);
+        manualControlButton.gameObject.SetActive(toggle);
+        startPlanButton.gameObject.SetActive(toggle);
     }
 
     private void CreateManualControlButtons()
     {
         var properties = typeof(ManualControlPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
-        Debug.Log(properties.Length);
+        
         foreach (var property in properties)
         {
-            var listItem = Instantiate(ListItemPrefab, ManualControlContent, true);
+            var listItem = Instantiate(listItemPrefab, manualControlContent, true);
             var listItemController = listItem.GetComponent<ListItemController>();
-
-            listItemController.title.text = property.Name;
+            
+            listItemController.title.text = property.Name.Replace("_", " ");
             listItemController.toggleController.onToggleOff.AddListener(delegate
             {
                 m2MqttPayloads.ToggleOnePart(false, property.Name);
@@ -67,6 +71,24 @@ public class UI_Manager : MonoBehaviour
             {
                 m2MqttPayloads.ToggleOnePart(true, property.Name);
             });
+        }
+    }
+
+    private void CreateBasicInfoListItems()
+    {
+        // mock
+        var initializeValuesPayload = new InitializeValuesPayload();
+        
+        var properties = typeof(InitializeValuesPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var property in properties)
+        {
+            var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, true);
+            var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
+            
+            basicInfoRowController.title.text = property.Name.Replace("_", " ");
+            basicInfoRowController.value.text =
+                initializeValuesPayload.GetType().GetField(property.Name).GetValue(initializeValuesPayload).ToString();
+
         }
     }
 }

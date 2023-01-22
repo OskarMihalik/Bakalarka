@@ -11,6 +11,11 @@ public class M2MqttPayloads : MonoBehaviour
         // {"reset_alarm":true}
         var payload = new ResetAlarmsPayload() {reset_alarm = true};
         m2MqttManager.PublishPayload(Topics.ResetAlarms, JsonUtility.ToJson(payload));
+    }   
+    public void InitializeValues()
+    {
+        // var payload = new InitializeValuesPayload();
+        m2MqttManager.PublishPayload(Topics.InitializeValues, "a");
     }
 
     public void ToggleOnePart(bool toggle, string part)
