@@ -59,7 +59,7 @@ public class UI_Manager : MonoBehaviour
         
         foreach (var property in properties)
         {
-            var listItem = Instantiate(listItemPrefab, manualControlContent, true);
+            var listItem = Instantiate(listItemPrefab, manualControlContent, false);
             var listItemController = listItem.GetComponent<ListItemController>();
             
             listItemController.title.text = property.Name.Replace("_", " ");
@@ -82,7 +82,7 @@ public class UI_Manager : MonoBehaviour
         var properties = typeof(InitializeValuesPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
         foreach (var property in properties)
         {
-            var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, true);
+            var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, false);
             var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
             
             basicInfoRowController.title.text = property.Name.Replace("_", " ");
