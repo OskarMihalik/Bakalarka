@@ -11,22 +11,29 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private M2MqttPayloads m2MqttPayloads;
 
     public Transform canvas;
-    public Transform connectButton;
-    public Transform resetAlarmsButton;
-    public Transform manualControlButton;
-    public Transform startPlanButton;
+
+    public Transform controlButtons;
+    public Transform basicInfoButton;
     public Transform manualControlContent;
     public Transform basicInfoContent;
+    public Transform basicInfo;
+    public Transform manualControlHolder;
+    public Transform connectPanel;
     
     public GameObject listItemPrefab;
     public GameObject basicInfoRowPrefab;
 
+    private Transform activeBottomDrawerPanel;
+    private Transform activeControlButton;
+    
     private void Start()
     {
         // m2MqttManager.Connect();
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
         CreateManualControlButtons();
         m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
+        activeBottomDrawerPanel = connectPanel;
+        activeControlButton = basicInfoButton;
     }
 
     private void OnDestroy()
@@ -45,12 +52,37 @@ public class UI_Manager : MonoBehaviour
         canvas.gameObject.SetActive(active);
     }
 
+    public void ToggleBasicInfo()
+    {
+        ChangeActiveBottomDrawerPanel(basicInfo);
+    }
+
+    public void ToggleConnectPanel()
+    {
+        ChangeActiveBottomDrawerPanel(connectPanel);
+    }
+
+    public void ToggleManualControlHolder()
+    {
+        ChangeActiveBottomDrawerPanel(manualControlHolder);
+    }
+
+    private void ChangeActiveBottomDrawerPanel(Transform newPanel)
+    {
+        if (activeBottomDrawerPanel != null && activeControlButton != null)
+        {
+            activeBottomDrawerPanel.gameObject.SetActive(false);
+        }
+        activeBottomDrawerPanel = newPanel;
+        newPanel.gameObject.SetActive(true);
+    }
+
     private void ToggleControls(bool toggle)
     {
-        // connectButton.GetComponent<Button>().interactable = toggle;
-        resetAlarmsButton.gameObject.SetActive(toggle);
-        manualControlButton.gameObject.SetActive(toggle);
-        startPlanButton.gameObject.SetActive(toggle);
+        controlButtons.gameObject.SetActive(toggle);
+        // resetAlarmsButton.gameObject.SetActive(toggle);
+        // manualControlButton.gameObject.SetActive(toggle);
+        // startPlanButton.gameObject.SetActive(toggle);
     }
 
     private void CreateManualControlButtons()

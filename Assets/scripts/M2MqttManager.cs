@@ -14,7 +14,7 @@ public class M2MqttManager : M2MqttUnityClient
     {
         client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload),
             MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-        Debug.Log("message published");
+        Debug.Log("message published topic: "+ topic);
     }
 
     public void AddActionToReceivedTopic(string topic, Action action)
