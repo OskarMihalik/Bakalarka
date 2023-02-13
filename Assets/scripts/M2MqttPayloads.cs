@@ -23,4 +23,10 @@ public class M2MqttPayloads : MonoBehaviour
         var payload = $"{{ \"{part}\":{toggle.ToString().ToLower()} }}";
         m2MqttManager.PublishPayload(Topics.ManualControl, payload);
     }
+    
+    public void ToggleOnePartInTopic(bool toggle, string part, string topic)
+    {
+        var payload = $"{{ \"{part}\":{toggle.ToString().ToLower()} }}";
+        m2MqttManager.PublishPayload(topic, payload);
+    }
 }

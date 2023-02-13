@@ -8,7 +8,7 @@ public class ToggleController : MonoBehaviour
 {
     [SerializeField] private Transform ToggleOn;
     [SerializeField] private Transform ToggleOff;
-    public bool Toggled { get; private set; }
+    public bool Toggled;
 
     public UnityEvent onToggleOn;
     public UnityEvent onToggleOff;

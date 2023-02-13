@@ -5,20 +5,19 @@ using UnityEngine.UI;
 
 public class ControlButtonsController : MonoBehaviour
 {
-    private List<Button> controlButtons = new List<Button>();
+    public List<Button> controlButtonsTabs = new List<Button>();
 
     private Button activeButton;
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Transform child in transform)
+        foreach (var controlBurron in controlButtonsTabs)
         {
-            var button = child.GetComponent<Button>();
+            var button = controlBurron.GetComponent<Button>();
             button.onClick.AddListener(()=>{Activate(button);});
-            controlButtons.Add(button);
         }
 
-        activeButton = controlButtons[0];
+        activeButton = controlButtonsTabs[0];
         activeButton.interactable = false;
     }
 
