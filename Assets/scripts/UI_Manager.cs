@@ -26,7 +26,7 @@ public class UI_Manager : MonoBehaviour
     private Transform activeBottomDrawerPanel;
     private Transform activeControlButton;
     
-    private void Start()
+    private void Awake()
     {
         // m2MqttManager.Connect();
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
@@ -45,6 +45,7 @@ public class UI_Manager : MonoBehaviour
     {
         m2MqttPayloads.InitializeValues();
         ToggleControls(true);
+        ToggleBasicInfo();
     }
 
     public void ToggleUI(bool active)
