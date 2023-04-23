@@ -55,7 +55,7 @@ public class M2MqttManager : M2MqttUnityClient
             eventActions[msg.topic]();
             return;
         }
-        Debug.LogWarning("no registered action with topic: " + msg.topic);
+        Debug.LogWarning("no registered action with topic: " + msg.topic + " payload:" + msg.message);
         
     }
 
@@ -75,12 +75,12 @@ public class M2MqttManager : M2MqttUnityClient
     {
         client.Subscribe(
             new string[]
-                {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl},
+                {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl, Topics.SustavaReader},
             new byte[]
             {
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
             });
     }
 

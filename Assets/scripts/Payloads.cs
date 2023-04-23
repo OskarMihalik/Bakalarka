@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 public static class Topics
 {
-    public static readonly string InitializeValues = "Initialize_values";
-    public static readonly string ManualControl = "Manual_control";
+    public static readonly string InitializeValues = "Initialize_values_from_unity";
+    public static readonly string ManualControl = "sustava1-writer";
     public static readonly string ResetAlarms = "Reset_alarms";
     public static readonly string Start = "Start";
     public static readonly string SwitchControl = "Switch_control";
+    public static readonly string SustavaReader = "sustava1-reader";
 }
 
 public class StoredMessage

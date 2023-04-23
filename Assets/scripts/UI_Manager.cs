@@ -66,6 +66,7 @@ public class UI_Manager : MonoBehaviour
     public void ToggleManualControlHolder()
     {
         ChangeActiveBottomDrawerPanel(manualControlHolder);
+        m2MqttPayloads.ToggleOnePartInTopic(true, "switch_control", Topics.SwitchControl);
     }
 
     private void ChangeActiveBottomDrawerPanel(Transform newPanel)
