@@ -1965,6 +1965,7 @@ MonoBehaviour:
   m2MqttManager: {fileID: 1012388609}
   m2MqttPayloads: {fileID: 1012388610}
   canvas: {fileID: 4849773}
+  viewModelMqtt: {fileID: 0}
   controlButtons: {fileID: 1970734235}
   basicInfoButton: {fileID: 511940231}
   manualControlContent: {fileID: 592789986}
@@ -3280,7 +3281,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1688855722}
   - component: {fileID: 1688855721}
-  - component: {fileID: 1688855723}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3332,18 +3332,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1688855723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688855720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8715ed4cddb72264da8b934e0df16b82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1746145574
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,7 +4438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1422389e745f6348ab24096480cd113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOfKey: 0
+  nameOfKey: 1
 --- !u!1001 &2131799507
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 public class M2MqttManager : M2MqttUnityClient
 {
     private List<StoredMessage> eventMessages = new List<StoredMessage>();
-    private Dictionary<string, Action> eventActions = new Dictionary<string, Action>();
+    private Dictionary<string, Action<string>> eventActions = new Dictionary<string, Action<string>>();
 
     public void PublishPayload(string topic, string payload)
     {
@@ -17,7 +17,7 @@ public class M2MqttManager : M2MqttUnityClient
         Debug.Log("message published topic: "+ topic);
     }
 
-    public void AddActionToReceivedTopic(string topic, Action action)
+    public void AddActionToReceivedTopic(string topic, Action<string> action)
     {
         eventActions.Add(topic, action);
     }
@@ -52,7 +52,7 @@ public class M2MqttManager : M2MqttUnityClient
     {
         if (eventActions.ContainsKey(msg.topic))
         {
-            eventActions[msg.topic]();
+            eventActions[msg.topic](msg.message);
             return;
         }
         Debug.LogWarning("no registered action with topic: " + msg.topic + " payload:" + msg.message);

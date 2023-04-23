@@ -8,9 +8,10 @@ using UnityMVVM.ViewModel;
 
 public class ViewModelMqtt : ViewModelBase
 {
+    #region Binding Properties
     public Dictionary<SustavaReaderValues, string> PlcValues
     {
-        get { return plcValues; }
+        get => plcValues;
         set
         {
             if (value == plcValues) return;
@@ -27,12 +28,12 @@ public class ViewModelMqtt : ViewModelBase
             Debug.LogWarning("key: " + key +" doesn't exist");
             return;
         }
-
+    
         if (plcValues[key] == value)
         {
             return;
         }
-
+    
         plcValues[key] = value;
         NotifyPropertyChanged(nameof(PlcValues));
     }
@@ -40,6 +41,7 @@ public class ViewModelMqtt : ViewModelBase
     [SerializeField]
     private Dictionary<SustavaReaderValues, string> plcValues;
     
+    #endregion
     private void Awake()
     {
         var newPlcValues = new Dictionary<SustavaReaderValues, string>();
@@ -56,6 +58,12 @@ public class ViewModelMqtt : ViewModelBase
         PlcValues = newPlcValues;
     }
 
+    private int vount;
     // Update is called once per frame
-
+    // private void Update()
+    // {
+    //     vount++;
+    //     // ViewModelMqtt
+    //     ChangePlcValue(SustavaReaderValues.material_na_linke, vount.ToString() );
+    // }
 }
