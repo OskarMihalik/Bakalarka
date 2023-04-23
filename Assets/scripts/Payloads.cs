@@ -50,6 +50,38 @@ public class InitializeValuesPayload
 }
 
 [Serializable]
+public enum SustavaReaderValues
+{
+    hotovy_material,
+    material_na_linke,
+    motoHours_line1_count,
+    motoHours_line1_sek,
+    motoHours_line1_min,
+    motoHours_line1_hod,
+    motoHours_line2_count,
+    motoHours_line2_sek,
+    motoHours_line2_min,
+    motoHours_line2_hod,
+    motoHours_line3_count,
+    motoHours_line3_sek,
+    motoHours_line3_min,
+    motoHours_line3_hod,
+    motoHours_line4_count,
+    motoHours_line4_sek,
+    motoHours_line4_min,
+    motoHours_line4_hod,
+    motoHours_machine1_count,
+    motoHours_machine1_sek,
+    motoHours_machine1_min,
+    motoHours_machine1_hod,
+    motoHours_machine2_count,
+    motoHours_machine2_sek,
+    motoHours_machine2_min,
+    motoHours_machine2_hod,
+
+}
+
+[Serializable]
 public class ManualControlPayload
 {
     public bool line1;

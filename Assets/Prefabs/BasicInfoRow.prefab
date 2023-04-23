@@ -145,6 +145,8 @@ GameObject:
   - component: {fileID: 9055415411265757822}
   - component: {fileID: 9055415411265757820}
   - component: {fileID: 9055415411265757821}
+  - component: {fileID: 7976072532134349271}
+  - component: {fileID: 6189425866093288875}
   m_Layer: 5
   m_Name: ValueText
   m_TagString: Untagged
@@ -268,6 +270,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7976072532134349271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055415411265757823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6254f6ce704a4a448c7af06a9bf9d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViewModelName: ViewModelMqtt
+  BindingMode: 0
+  SrcPropertyName: PlcValues
+  DstPropertyName: text
+  SrcPropertyPath: 
+  DstPropertyPath: 
+  DstView: {fileID: 9055415411265757821}
+  Converter: {fileID: 6189425866093288875}
+  DstChangedEventName: onCullStateChanged
+--- !u!114 &6189425866093288875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055415411265757823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1422389e745f6348ab24096480cd113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfKey: 0
 --- !u!1 &9055415411696178989
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,3 +472,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 9055415410258931713}
   value: {fileID: 9055415411265757821}
+  dataBindingConverterDictionary: {fileID: 6189425866093288875}

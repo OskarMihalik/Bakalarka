@@ -36,6 +36,12 @@ public class UI_Manager : MonoBehaviour
         activeControlButton = basicInfoButton;
     }
 
+    private void Start()
+    {
+        // TODO: add changing values from keys
+        // m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
+    }
+
     private void OnDestroy()
     {
         m2MqttManager.ConnectionSucceeded -= ConnectionSucceeded;
@@ -110,9 +116,6 @@ public class UI_Manager : MonoBehaviour
 
     private void CreateBasicInfoListItems()
     {
-        // mock
-        var initializeValuesPayload = new InitializeValuesPayload();
-        
         var properties = typeof(InitializeValuesPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
         foreach (var property in properties)
         {
@@ -120,9 +123,8 @@ public class UI_Manager : MonoBehaviour
             var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
             
             basicInfoRowController.title.text = property.Name.Replace("_", " ");
-            basicInfoRowController.value.text =
-                initializeValuesPayload.GetType().GetField(property.Name).GetValue(initializeValuesPayload).ToString();
-
+            Enum.TryParse(property.Name, out SustavaReaderValues key);
+            basicInfoRowController.SetConverterKey(key);
         }
     }
 }

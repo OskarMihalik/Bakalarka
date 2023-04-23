@@ -34,6 +34,13 @@
         "com.unity.ugui": "1.0.0"
       }
     },
+    "com.push-pop.unitymvvm": {
+      "version": "https://github.com/push-pop/Unity-MVVM.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "65a72798b572db7ef2121e6ff6bc3430cfc46b35"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
