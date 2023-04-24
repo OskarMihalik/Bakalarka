@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityMVVM.Util;
@@ -31,7 +32,6 @@ public class UI_Manager : MonoBehaviour
     
     private void Awake()
     {
-        // m2MqttManager.Connect();
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
         CreateManualControlButtons();
         m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
@@ -44,27 +44,25 @@ public class UI_Manager : MonoBehaviour
         m2MqttManager.AddActionToReceivedTopic(Topics.SustavaReader, OnSustavaReaderReceive);
 
         viewModelMqtt = ViewModelProvider.Instance.GetViewModelInstance<ViewModelMqtt>();
-     
-    }
-    
-    private void Update()
-    {
-        vount++;
-        // ViewModelMqtt
-        viewModelMqtt.ChangePlcValue(SustavaReaderValues.material_na_linke, vount.ToString() );
     }
 
     private void OnSustavaReaderReceive(string message)
     {
-        var jsonObject = JsonUtility.FromJson<object>(message);
+        var jsonDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+        if (jsonDict == null)
+        {
+            Debug.LogWarning("can't convert to dictionary, message: " + message);
+            return;
+        }
         foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderValues)))
         {
-            var containsProperty = jsonObject.GetType().GetProperty(propertyName) != null;
-            if (!containsProperty) continue;
+            if (!jsonDict.ContainsKey(propertyName)) continue;
+            var property = jsonDict[propertyName];
+            if (string.IsNullOrEmpty(property)) continue;
             Enum.TryParse(propertyName, out SustavaReaderValues key);
-            var property = (string)jsonObject.GetType().GetProperty(propertyName)?.GetValue(jsonObject, null);
             viewModelMqtt.ChangePlcValue(key, property );
             Console.WriteLine(propertyName);
+            break;
         }
     }
 
