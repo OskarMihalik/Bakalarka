@@ -15,12 +15,16 @@ public class UI_Manager : MonoBehaviour
     public Transform canvas;
     public Transform controlButtons;
     public Transform basicInfoButton;
+    [Header("Contents")]
     public Transform manualControlContent;
     public Transform basicInfoContent;
+    public Transform alarmsInfoContent;
+    [Header("Panels")]
     public Transform basicInfo;
     public Transform manualControlHolder;
     public Transform connectPanel;
-    
+    public Transform alarmsPanel;
+    [Header("Prefabs")]
     public GameObject listItemPrefab;
     public GameObject basicInfoRowPrefab;
 
@@ -42,7 +46,7 @@ public class UI_Manager : MonoBehaviour
     private void Start()
     {
         m2MqttManager.AddActionToReceivedTopic(Topics.SustavaReader, OnSustavaReaderReceive);
-
+        CreateAlarmsInfoListItems();
         viewModelMqtt = ViewModelProvider.Instance.GetViewModelInstance<ViewModelMqtt>();
     }
 
@@ -92,6 +96,11 @@ public class UI_Manager : MonoBehaviour
     {
         ChangeActiveBottomDrawerPanel(connectPanel);
     }
+    
+    public void ToggleAlarmsPanel()
+    {
+        ChangeActiveBottomDrawerPanel(alarmsPanel);
+    }
 
     public void ToggleManualControlHolder()
     {
@@ -112,9 +121,6 @@ public class UI_Manager : MonoBehaviour
     private void ToggleControls(bool toggle)
     {
         controlButtons.gameObject.SetActive(toggle);
-        // resetAlarmsButton.gameObject.SetActive(toggle);
-        // manualControlButton.gameObject.SetActive(toggle);
-        // startPlanButton.gameObject.SetActive(toggle);
     }
 
     private void CreateManualControlButtons()
@@ -142,6 +148,18 @@ public class UI_Manager : MonoBehaviour
         foreach (var key in SustavaViews.BasicInfoKeys)
         {
             var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, false);
+            var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
+            
+            basicInfoRowController.title.text = key.ToString().Replace("_", " ");
+            basicInfoRowController.SetConverterKey(key);
+        }
+    }
+    
+    private void CreateAlarmsInfoListItems()
+    {
+        foreach (var key in SustavaViews.AlarmsKeys)
+        {
+            var basicInfoRow = Instantiate(basicInfoRowPrefab, alarmsInfoContent, false);
             var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
             
             basicInfoRowController.title.text = key.ToString().Replace("_", " ");
