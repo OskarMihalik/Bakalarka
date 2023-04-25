@@ -9,7 +9,7 @@ using UnityMVVM.ViewModel;
 public class ViewModelMqtt : ViewModelBase
 {
     #region Binding Properties
-    public Dictionary<SustavaReaderValues, string> PlcValues
+    public Dictionary<SustavaReaderEnumKeys, string> PlcValues
     {
         get => plcValues;
         set
@@ -21,7 +21,7 @@ public class ViewModelMqtt : ViewModelBase
         }
     }
 
-    public void ChangePlcValue(SustavaReaderValues key, string value)
+    public void ChangePlcValue(SustavaReaderEnumKeys key, string value)
     {
         if (!plcValues.ContainsKey(key))
         {
@@ -39,31 +39,19 @@ public class ViewModelMqtt : ViewModelBase
     }
 
     [SerializeField]
-    private Dictionary<SustavaReaderValues, string> plcValues;
+    private Dictionary<SustavaReaderEnumKeys, string> plcValues;
     
     #endregion
     private void Awake()
     {
-        var newPlcValues = new Dictionary<SustavaReaderValues, string>();
+        var newPlcValues = new Dictionary<SustavaReaderEnumKeys, string>();
 
-        var properties = typeof(InitializeValuesPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
-        
-        foreach (var property in properties)
+        foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderEnumKeys)))
         {
-            SustavaReaderValues key;
-            Enum.TryParse(property.Name, out key);
+            Enum.TryParse(propertyName, out SustavaReaderEnumKeys key);
             newPlcValues.Add(key, "0");
         }
 
         PlcValues = newPlcValues;
     }
-
-    private int vount;
-    // Update is called once per frame
-    // private void Update()
-    // {
-    //     vount++;
-    //     // ViewModelMqtt
-    //     ChangePlcValue(SustavaReaderValues.material_na_linke, vount.ToString() );
-    // }
 }

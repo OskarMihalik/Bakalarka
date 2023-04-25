@@ -54,12 +54,12 @@ public class UI_Manager : MonoBehaviour
             Debug.LogWarning("can't convert to dictionary, message: " + message);
             return;
         }
-        foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderValues)))
+        foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderEnumKeys)))
         {
             if (!jsonDict.ContainsKey(propertyName)) continue;
             var property = jsonDict[propertyName];
             if (string.IsNullOrEmpty(property)) continue;
-            Enum.TryParse(propertyName, out SustavaReaderValues key);
+            Enum.TryParse(propertyName, out SustavaReaderEnumKeys key);
             viewModelMqtt.ChangePlcValue(key, property );
             Console.WriteLine(propertyName);
             break;
@@ -119,35 +119,32 @@ public class UI_Manager : MonoBehaviour
 
     private void CreateManualControlButtons()
     {
-        var properties = typeof(ManualControlPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
-        
-        foreach (var property in properties)
+        foreach (var property in SustavaViews.ControllableKeys)
         {
             var listItem = Instantiate(listItemPrefab, manualControlContent, false);
             var listItemController = listItem.GetComponent<ListItemController>();
-            
-            listItemController.title.text = property.Name.Replace("_", " ");
+
+            var propertyName = property.ToString();
+            listItemController.title.text = propertyName.Replace("_", " ");
             listItemController.toggleController.onToggleOff.AddListener(delegate
             {
-                m2MqttPayloads.ToggleOnePart(false, property.Name);
+                m2MqttPayloads.ToggleOnePart(false, propertyName);
             });
             listItemController.toggleController.onToggleOn.AddListener(delegate
             {
-                m2MqttPayloads.ToggleOnePart(true, property.Name);
+                m2MqttPayloads.ToggleOnePart(true, propertyName);
             });
         }
     }
 
     private void CreateBasicInfoListItems(string _)
     {
-        var properties = typeof(InitializeValuesPayload).GetFields(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var property in properties)
+        foreach (var key in SustavaViews.BasicInfoKeys)
         {
             var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, false);
             var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
             
-            basicInfoRowController.title.text = property.Name.Replace("_", " ");
-            Enum.TryParse(property.Name, out SustavaReaderValues key);
+            basicInfoRowController.title.text = key.ToString().Replace("_", " ");
             basicInfoRowController.SetConverterKey(key);
         }
     }

@@ -6,16 +6,16 @@ using UnityMVVM.Binding.Converters;
 
 public class DataBindingConverterDictionary : ValueConverterBase
 {
-    [SerializeField] private SustavaReaderValues nameOfKey;
+    [SerializeField] private SustavaReaderEnumKeys nameOfKey;
 
-    public void SetNameOfKey(SustavaReaderValues key)
+    public void SetNameOfKey(SustavaReaderEnumKeys key)
     {
         nameOfKey = key;
     }
 
     public override object Convert(object value, Type targetType, object parameter)
     {
-        var b = (Dictionary<SustavaReaderValues,string>) value;
+        var b = (Dictionary<SustavaReaderEnumKeys,string>) value;
 
         return b[nameOfKey];
     }
