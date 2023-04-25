@@ -30,8 +30,7 @@ public class UI_Manager : MonoBehaviour
 
     private Transform activeBottomDrawerPanel;
     private Transform activeControlButton;
-
-    private int vount;
+    
     private ViewModelMqtt viewModelMqtt;
     
     private void Awake()
@@ -107,7 +106,7 @@ public class UI_Manager : MonoBehaviour
         ChangeActiveBottomDrawerPanel(manualControlHolder);
         m2MqttPayloads.ToggleOnePartInTopic(true, "switch_control", Topics.SwitchControl);
     }
-
+    
     private void ChangeActiveBottomDrawerPanel(Transform newPanel)
     {
         if (activeBottomDrawerPanel != null && activeControlButton != null)

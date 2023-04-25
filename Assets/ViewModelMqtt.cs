@@ -5,7 +5,6 @@ using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityMVVM.ViewModel;
-
 public class ViewModelMqtt : ViewModelBase
 {
     #region Binding Properties
@@ -39,17 +38,20 @@ public class ViewModelMqtt : ViewModelBase
     }
 
     [SerializeField]
-    private Dictionary<SustavaReaderEnumKeys, string> plcValues;
+    private Dictionary<SustavaReaderEnumKeys, string> plcValues = new Dictionary<SustavaReaderEnumKeys, string>();
     
     #endregion
-    private void Awake()
+    private void OnEnable()
     {
         var newPlcValues = new Dictionary<SustavaReaderEnumKeys, string>();
 
         foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderEnumKeys)))
         {
             Enum.TryParse(propertyName, out SustavaReaderEnumKeys key);
-            newPlcValues.Add(key, "0");
+            var type = SustavaReaderAllKeys.GetFieldTypeFromEnum(key);
+            
+            var variable = Utils.CreateVariableFromType(type);
+            newPlcValues.Add(key, variable.ToString());
         }
 
         PlcValues = newPlcValues;

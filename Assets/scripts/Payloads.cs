@@ -83,6 +83,19 @@ public class SustavaReaderAllKeys
     public int motoHours_machine2_sek;
     public int motoHours_machine2_min;
     public int motoHours_machine2_hod;
+    
+    public static Type GetFieldTypeFromEnum(SustavaReaderEnumKeys enumValue)
+    {
+        string fieldName = enumValue.ToString(); // Get the field name as a string from the enum
+        var fieldInfo = typeof(SustavaReaderAllKeys).GetField(fieldName); // Get the field info using reflection
+
+        if (fieldInfo != null)
+        {
+            return fieldInfo.FieldType;
+        }
+
+        throw new ArgumentException($"Field not found for enum value '{enumValue}'.");
+    }
 }
 
 [Serializable]
