@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v5.8.3">
+        <ModelTarget name="PLC_bakalarka_v2" targetId="6e065f3587924ea6a1ce975ab53285ba" version="13.0" toolVersion="v5.8.3" bbox="-0.369376 -0.052806 -0.405697 0.407671 0.306019 0.427900" trackingMode="scan" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="yes" />
+    </TargetSet>
+    <Assembly name="PLC_bakalarka_v2" assemblyId="b154c84091bc4a8e8eebd64ff3055240">
+        <Part name="PLC_bakalarka_v2" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>
