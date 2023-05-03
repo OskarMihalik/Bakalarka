@@ -3464,6 +3464,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1213089864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213089858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6254f6ce704a4a448c7af06a9bf9d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViewModelName: ViewModelMqtt
+  BindingMode: 0
+  SrcPropertyName: PlcValues
+  DstPropertyName: name
+  SrcPropertyPath: 
+  DstPropertyPath: 
+  DstView: {fileID: 1330238062}
+  Converter: {fileID: 1213089865}
+  DstChangedEventName: 
+--- !u!114 &1213089865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213089858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707a40dc254b4394c8a4ecac3c0868cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleController: {fileID: 1213089860}
+  keyToWatch: 21
 --- !u!1 &1216369586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,6 +3886,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1330238062 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4765742747244513488, guid: 63bd331e50606274e8ab5788cefb6c41,
+    type: 3}
+  m_PrefabInstance: {fileID: 723710105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1351821929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8428938007701139764, guid: 63bd331e50606274e8ab5788cefb6c41,
