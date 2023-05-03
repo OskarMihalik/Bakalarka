@@ -81,6 +81,10 @@ namespace M2MqttUnity
         /// Event fired when failing to connect
         /// </summary>
         public event Action ConnectionFailed;
+        /// <summary>
+        /// Event fired when disconnected
+        /// </summary>
+        public event Action ConnectionDisconnected;
 
         /// <summary>
         /// Connect to the broker using current settings.
@@ -342,6 +346,10 @@ namespace M2MqttUnity
         {
             yield return new WaitForEndOfFrame();
             CloseConnection();
+            if (ConnectionDisconnected != null)
+            {
+                ConnectionDisconnected();
+            }
             OnDisconnected();
         }
 

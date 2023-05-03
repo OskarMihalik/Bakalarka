@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4330117317246799738}
   - component: {fileID: 4330117317246799739}
   - component: {fileID: 8523547098796468360}
+  - component: {fileID: 3963703572717696854}
+  - component: {fileID: 7501974804935813008}
   m_Layer: 5
   m_Name: ListItem
   m_TagString: Untagged
@@ -197,6 +199,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleController: {fileID: 5447402358666630926}
   title: {fileID: 4330117318157635968}
+--- !u!114 &3963703572717696854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330117317246799737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6254f6ce704a4a448c7af06a9bf9d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViewModelName: ViewModelMqtt
+  BindingMode: 0
+  SrcPropertyName: PlcValues
+  DstPropertyName: name
+  SrcPropertyPath: 
+  DstPropertyPath: 
+  DstView: {fileID: 5447402358666630914}
+  Converter: {fileID: 7501974804935813008}
+  DstChangedEventName: 
+--- !u!114 &7501974804935813008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330117317246799737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707a40dc254b4394c8a4ecac3c0868cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleController: {fileID: 5447402358666630926}
+  keyToWatch: 9
 --- !u!1 &4330117318157635983
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class UI_Manager : MonoBehaviour
     public Transform manualControlHolder;
     public Transform connectPanel;
     public Transform alarmsPanel;
+    public Transform controllButtonsShower;
     [Header("Prefabs")]
     public GameObject listItemPrefab;
     public GameObject basicInfoRowPrefab;
@@ -36,6 +37,8 @@ public class UI_Manager : MonoBehaviour
     private void Awake()
     {
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
+        m2MqttManager.ConnectionFailed += OnDisconnect;
+        m2MqttManager.ConnectionDisconnected += OnDisconnect;
         CreateManualControlButtons();
         m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
         activeBottomDrawerPanel = connectPanel;
@@ -80,6 +83,12 @@ public class UI_Manager : MonoBehaviour
         ToggleControls(true);
         ToggleBasicInfo();
     }
+    
+    private void OnDisconnect()
+    {
+        ToggleControls(false);
+        ToggleConnectPanel();
+    }
 
     public void ToggleUI(bool active)
     {
@@ -120,6 +129,7 @@ public class UI_Manager : MonoBehaviour
     private void ToggleControls(bool toggle)
     {
         controlButtons.gameObject.SetActive(toggle);
+        controllButtonsShower.gameObject.SetActive(toggle);
     }
 
     private void CreateManualControlButtons()
@@ -128,7 +138,8 @@ public class UI_Manager : MonoBehaviour
         {
             var listItem = Instantiate(listItemPrefab, manualControlContent, false);
             var listItemController = listItem.GetComponent<ListItemController>();
-
+            var listItemConverter = listItem.GetComponent<DataBindingConverterManualControlButton>();
+            listItemConverter.keyToWatch = property;
             var propertyName = property.ToString();
             listItemController.title.text = propertyName.Replace("_", " ");
             listItemController.toggleController.onToggleOff.AddListener(delegate

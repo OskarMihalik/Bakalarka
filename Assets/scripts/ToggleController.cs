@@ -25,19 +25,21 @@ public class ToggleController : MonoBehaviour
         Toggled = false;
     }
 
-    public void Toggle(bool toggle)
+    public void Toggle(bool toggle, bool toggleEvents = true)
     {
         if (toggle)
         {
             ToggleOn.gameObject.SetActive(true);
             ToggleOff.gameObject.SetActive(false);
-            TogglingOn();
+            if (toggleEvents)
+                TogglingOn();
         }
         else
         {
             ToggleOn.gameObject.SetActive(false);
             ToggleOff.gameObject.SetActive(true);
-            TogglingOff();
+            if (toggleEvents)
+                TogglingOff();
         }
     }
 
