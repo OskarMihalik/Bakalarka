@@ -29,17 +29,23 @@ public class ToggleController : MonoBehaviour
     {
         if (toggle)
         {
-            ToggleOn.gameObject.SetActive(true);
-            ToggleOff.gameObject.SetActive(false);
             if (toggleEvents)
                 TogglingOn();
+            else
+            {
+                ToggleOn.gameObject.SetActive(true);
+                ToggleOff.gameObject.SetActive(false);
+            }
         }
         else
         {
-            ToggleOn.gameObject.SetActive(false);
-            ToggleOff.gameObject.SetActive(true);
             if (toggleEvents)
                 TogglingOff();
+            else
+            {
+                ToggleOn.gameObject.SetActive(false);
+                ToggleOff.gameObject.SetActive(true);
+            }
         }
     }
 
