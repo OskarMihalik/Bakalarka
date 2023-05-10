@@ -6,9 +6,6 @@ public static class Topics
 {
     public static readonly string InitializeValues = "Initialize_values_from_unity";
     public static readonly string ManualControl = "sustava1-writer";
-    public static readonly string ResetAlarms = "Reset_alarms";
-    public static readonly string Start = "Start";
-    public static readonly string SwitchControl = "Switch_control";
     public static readonly string SustavaReader = "sustava1-reader";
 }
 
@@ -208,10 +205,10 @@ public static class SustavaViews
         SustavaReaderEnumKeys.line2,
         SustavaReaderEnumKeys.line3,
         SustavaReaderEnumKeys.line4,
-        SustavaReaderEnumKeys.slider1_front,
-        SustavaReaderEnumKeys.slider1_back,
-        SustavaReaderEnumKeys.slider2_front,
-        SustavaReaderEnumKeys.slider2_back,
+        SustavaReaderEnumKeys.slider1_go_forward,
+        SustavaReaderEnumKeys.slider1_go_back,
+        SustavaReaderEnumKeys.slider2_go_forward,
+        SustavaReaderEnumKeys.slider2_go_back,
         SustavaReaderEnumKeys.machine1,
         SustavaReaderEnumKeys.machine2,
     };

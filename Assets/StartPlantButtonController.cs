@@ -9,6 +9,6 @@ public class StartPlantButtonController : MonoBehaviour
     
     public void StopStartPlant(bool toggle)
     {
-        m2MqttPayloads.ToggleOnePartInTopic(toggle, "start", Topics.Start);
+        m2MqttPayloads.ToggleOnePartInTopic(toggle, "start", Topics.ManualControl);
     }
 }

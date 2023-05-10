@@ -113,7 +113,7 @@ public class UI_Manager : MonoBehaviour
     public void ToggleManualControlHolder()
     {
         ChangeActiveBottomDrawerPanel(manualControlHolder);
-        m2MqttPayloads.ToggleOnePartInTopic(true, "switch_control", Topics.SwitchControl);
+        m2MqttPayloads.ToggleOnePartInTopic(true, "switch_control", Topics.ManualControl);
     }
     
     private void ChangeActiveBottomDrawerPanel(Transform newPanel)
@@ -121,6 +121,11 @@ public class UI_Manager : MonoBehaviour
         if (activeBottomDrawerPanel != null && activeControlButton != null)
         {
             activeBottomDrawerPanel.gameObject.SetActive(false);
+        }
+
+        if (activeBottomDrawerPanel != null && viewModelMqtt.PlcValues[SustavaReaderEnumKeys.switch_control] == "true" && activeBottomDrawerPanel == manualControlHolder)
+        {
+            m2MqttPayloads.ToggleOnePartInTopic(false, "switch_control", Topics.ManualControl);
         }
         activeBottomDrawerPanel = newPanel;
         newPanel.gameObject.SetActive(true);

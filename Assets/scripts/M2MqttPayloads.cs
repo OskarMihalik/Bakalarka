@@ -8,9 +8,7 @@ public class M2MqttPayloads : MonoBehaviour
 
     public void ResetAlarms()
     {
-        // {"reset_alarm":true}
-        var payload = new ResetAlarmsPayload() {reset_alarm = true};
-        m2MqttManager.PublishPayload(Topics.ResetAlarms, JsonUtility.ToJson(payload));
+        ToggleOnePart(true, SustavaReaderEnumKeys.reset_alarms.ToString());
     }   
     public void InitializeValues()
     {

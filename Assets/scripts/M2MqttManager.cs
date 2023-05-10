@@ -14,14 +14,14 @@ public class M2MqttManager : M2MqttUnityClient
     {
         client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload),
             MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-        Debug.Log("message published topic: "+ topic);
+        Debug.Log("message published topic: " + topic);
     }
 
     public void AddActionToReceivedTopic(string topic, Action<string> action)
     {
         eventActions.Add(topic, action);
     }
-    
+
     protected override void Update()
     {
         base.Update(); // call ProcessMqttEvents()
@@ -39,7 +39,7 @@ public class M2MqttManager : M2MqttUnityClient
     protected override void DecodeMessage(string topic, byte[] message)
     {
         string msg = System.Text.Encoding.UTF8.GetString(message);
-        Debug.Log("DecodeMessage: " + msg);
+        Debug.Log("DecodeMessage: " + msg + " // Topic:" + topic);
         StoreMessage(topic, msg);
     }
 
@@ -55,8 +55,8 @@ public class M2MqttManager : M2MqttUnityClient
             eventActions[msg.topic](msg.message);
             return;
         }
+
         Debug.LogWarning("no registered action with topic: " + msg.topic + " payload:" + msg.message);
-        
     }
 
     protected override void OnConnecting()
@@ -75,19 +75,18 @@ public class M2MqttManager : M2MqttUnityClient
     {
         client.Subscribe(
             new string[]
-                {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl, Topics.SustavaReader},
+                {Topics.ManualControl, Topics.InitializeValues, Topics.SustavaReader},
             new byte[]
             {
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
-            });
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
+            }); 
     }
 
     protected override void UnsubscribeTopics()
     {
         client.Unsubscribe(new string[]
-            {Topics.ManualControl, Topics.InitializeValues, Topics.Start, Topics.ResetAlarms, Topics.SwitchControl});
+            {Topics.ManualControl, Topics.InitializeValues});
     }
 
     protected override void OnConnectionFailed(string errorMessage)

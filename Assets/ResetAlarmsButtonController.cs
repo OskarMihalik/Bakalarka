@@ -8,6 +8,6 @@ public class ResetAlarmsButtonController : MonoBehaviour
 
     public void ResetAlarms()
     {
-        m2MqttPayloads.ToggleOnePartInTopic(true, "reset_alarm", Topics.ResetAlarms);
+        m2MqttPayloads.ToggleOnePartInTopic(true, SustavaReaderEnumKeys.reset_alarms.ToString(), Topics.ManualControl);
     } 
 }
