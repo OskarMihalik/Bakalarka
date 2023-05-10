@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public static class Topics
 {
-    public static readonly string InitializeValues = "Initialize_values_from_unity";
+    public static readonly string InitializeValues = "sustava1_initialize_request";
+    public static readonly string GetInitializeValues = "sustava1_initializer";
     public static readonly string ManualControl = "sustava1-writer";
     public static readonly string SustavaReader = "sustava1-reader";
 }
@@ -57,27 +58,27 @@ public class SustavaReaderAllKeys
     public int hotovy_material;
     public int material_na_linke;
     public int motoHours_line1_count;
-    public int motoHours_line1_sek;
+    public int motoHours_line1_sec;
     public int motoHours_line1_min;
     public int motoHours_line1_hod;
     public int motoHours_line2_count;
-    public int motoHours_line2_sek;
+    public int motoHours_line2_sec;
     public int motoHours_line2_min;
     public int motoHours_line2_hod;
     public int motoHours_line3_count;
-    public int motoHours_line3_sek;
+    public int motoHours_line3_sec;
     public int motoHours_line3_min;
     public int motoHours_line3_hod;
     public int motoHours_line4_count;
-    public int motoHours_line4_sek;
+    public int motoHours_line4_sec;
     public int motoHours_line4_min;
     public int motoHours_line4_hod;
     public int motoHours_machine1_count;
-    public int motoHours_machine1_sek;
+    public int motoHours_machine1_sec;
     public int motoHours_machine1_min;
     public int motoHours_machine1_hod;
     public int motoHours_machine2_count;
-    public int motoHours_machine2_sek;
+    public int motoHours_machine2_sec;
     public int motoHours_machine2_min;
     public int motoHours_machine2_hod;
     
@@ -102,9 +103,9 @@ public enum SustavaReaderEnumKeys
     slider1_back,
     slider2_front,
     slider2_back,
+    LED1,
     LED2,
     LED3,
-    LED1,
     LED4,
     LED5,
     slider1_go_forward,
@@ -137,27 +138,27 @@ public enum SustavaReaderEnumKeys
     hotovy_material,
     material_na_linke,
     motoHours_line1_count,
-    motoHours_line1_sek,
+    motoHours_line1_sec,
     motoHours_line1_min,
     motoHours_line1_hod,
     motoHours_line2_count,
-    motoHours_line2_sek,
+    motoHours_line2_sec,
     motoHours_line2_min,
     motoHours_line2_hod,
     motoHours_line3_count,
-    motoHours_line3_sek,
+    motoHours_line3_sec,
     motoHours_line3_min,
     motoHours_line3_hod,
     motoHours_line4_count,
-    motoHours_line4_sek,
+    motoHours_line4_sec,
     motoHours_line4_min,
     motoHours_line4_hod,
     motoHours_machine1_count,
-    motoHours_machine1_sek,
+    motoHours_machine1_sec,
     motoHours_machine1_min,
     motoHours_machine1_hod,
     motoHours_machine2_count,
-    motoHours_machine2_sek,
+    motoHours_machine2_sec,
     motoHours_machine2_min,
     motoHours_machine2_hod,
 }
@@ -166,35 +167,35 @@ public static class SustavaViews
 {
     public static readonly List<SustavaReaderEnumKeys> BasicInfoKeys = new List<SustavaReaderEnumKeys>()
     {
+        SustavaReaderEnumKeys.LED1,
         SustavaReaderEnumKeys.LED2,
         SustavaReaderEnumKeys.LED3,
-        SustavaReaderEnumKeys.LED1,
         SustavaReaderEnumKeys.LED4,
         SustavaReaderEnumKeys.LED5,
         SustavaReaderEnumKeys.hotovy_material,
         SustavaReaderEnumKeys.material_na_linke,
         SustavaReaderEnumKeys.motoHours_line1_count,
-        SustavaReaderEnumKeys.motoHours_line1_sek,
+        SustavaReaderEnumKeys.motoHours_line1_sec,
         SustavaReaderEnumKeys.motoHours_line1_min,
         SustavaReaderEnumKeys.motoHours_line1_hod,
         SustavaReaderEnumKeys.motoHours_line2_count,
-        SustavaReaderEnumKeys.motoHours_line2_sek,
+        SustavaReaderEnumKeys.motoHours_line2_sec,
         SustavaReaderEnumKeys.motoHours_line2_min,
         SustavaReaderEnumKeys.motoHours_line2_hod,
         SustavaReaderEnumKeys.motoHours_line3_count,
-        SustavaReaderEnumKeys.motoHours_line3_sek,
+        SustavaReaderEnumKeys.motoHours_line3_sec,
         SustavaReaderEnumKeys.motoHours_line3_min,
         SustavaReaderEnumKeys.motoHours_line3_hod,
         SustavaReaderEnumKeys.motoHours_line4_count,
-        SustavaReaderEnumKeys.motoHours_line4_sek,
+        SustavaReaderEnumKeys.motoHours_line4_sec,
         SustavaReaderEnumKeys.motoHours_line4_min,
         SustavaReaderEnumKeys.motoHours_line4_hod,
         SustavaReaderEnumKeys.motoHours_machine1_count,
-        SustavaReaderEnumKeys.motoHours_machine1_sek,
+        SustavaReaderEnumKeys.motoHours_machine1_sec,
         SustavaReaderEnumKeys.motoHours_machine1_min,
         SustavaReaderEnumKeys.motoHours_machine1_hod,
         SustavaReaderEnumKeys.motoHours_machine2_count,
-        SustavaReaderEnumKeys.motoHours_machine2_sek,
+        SustavaReaderEnumKeys.motoHours_machine2_sec,
         SustavaReaderEnumKeys.motoHours_machine2_min,
         SustavaReaderEnumKeys.motoHours_machine2_hod,
     };

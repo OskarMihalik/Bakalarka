@@ -75,11 +75,11 @@ public class M2MqttManager : M2MqttUnityClient
     {
         client.Subscribe(
             new string[]
-                {Topics.ManualControl, Topics.InitializeValues, Topics.SustavaReader},
+                {Topics.ManualControl, Topics.InitializeValues, Topics.SustavaReader, Topics.GetInitializeValues},
             new byte[]
             {
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE 
             }); 
     }
 

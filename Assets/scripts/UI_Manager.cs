@@ -48,6 +48,7 @@ public class UI_Manager : MonoBehaviour
     private void Start()
     {
         m2MqttManager.AddActionToReceivedTopic(Topics.SustavaReader, OnSustavaReaderReceive);
+        m2MqttManager.AddActionToReceivedTopic(Topics.GetInitializeValues, OnSustavaReaderReceive);
         CreateAlarmsInfoListItems();
         viewModelMqtt = ViewModelProvider.Instance.GetViewModelInstance<ViewModelMqtt>();
     }
@@ -60,15 +61,17 @@ public class UI_Manager : MonoBehaviour
             Debug.LogWarning("can't convert to dictionary, message: " + message);
             return;
         }
-        foreach (var propertyName in Enum.GetNames(typeof(SustavaReaderEnumKeys)))
+
+        foreach (var element in jsonDict)
         {
-            if (!jsonDict.ContainsKey(propertyName)) continue;
-            var property = jsonDict[propertyName];
-            if (string.IsNullOrEmpty(property)) continue;
-            Enum.TryParse(propertyName, out SustavaReaderEnumKeys key);
-            viewModelMqtt.ChangePlcValue(key, property );
-            Console.WriteLine(propertyName);
-            break;
+            if (Enum.TryParse(element.Key, out SustavaReaderEnumKeys enumReader))
+            {
+                viewModelMqtt.ChangePlcValue(enumReader, element.Value );
+            }
+            else
+            {
+                Debug.LogWarning($"can't convert {element.Key} to  SustavaReaderEnumKeys");
+            }
         }
     }
 

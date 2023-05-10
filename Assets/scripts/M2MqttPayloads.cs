@@ -12,8 +12,7 @@ public class M2MqttPayloads : MonoBehaviour
     }   
     public void InitializeValues()
     {
-        // var payload = new InitializeValuesPayload();
-        m2MqttManager.PublishPayload(Topics.InitializeValues, "a");
+        m2MqttManager.PublishPayload(Topics.InitializeValues, "payload: true");
     }
 
     public void ToggleOnePart(bool toggle, string part)
