@@ -6352,7 +6352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89cbcb0d97a283e48b14c92518daf08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipScanning: 0
+  skipScanning: 1
   eventsOnScan:
     m_PersistentCalls:
       m_Calls:
