@@ -2297,6 +2297,7 @@ GameObject:
   - component: {fileID: 794725173}
   - component: {fileID: 794725175}
   - component: {fileID: 794725174}
+  - component: {fileID: 794725176}
   m_Layer: 5
   m_Name: AlarmIcon
   m_TagString: Untagged
@@ -2313,7 +2314,7 @@ RectTransform:
   m_GameObject: {fileID: 794725172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1.05847, y: 1.05847, z: 1.5121}
   m_Children: []
   m_Father: {fileID: 733507714}
   m_RootOrder: 2
@@ -2361,6 +2362,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794725172}
   m_CullTransparentMesh: 1
+--- !u!114 &794725176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794725172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07327b4fefa5eb142b4f50a89532f196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &806238017 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5447402358666630926, guid: 8c24cebbb28aa41478b9c3a3e49e9dac,
