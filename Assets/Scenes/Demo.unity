@@ -1783,7 +1783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.24}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0009460449}
+  m_AnchoredPosition: {x: 0, y: -0.0009765625}
   m_SizeDelta: {x: -7, y: -85.606674}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &592789987
@@ -2502,8 +2502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -8.1}
-  m_SizeDelta: {x: 0, y: 10.7}
+  m_AnchoredPosition: {x: 0, y: -13.19}
+  m_SizeDelta: {x: 0, y: 27.04}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &854083877
 MonoBehaviour:
@@ -2518,7 +2518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.70980394}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2586,7 +2586,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 854083877}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1816271937}
+        m_TargetAssemblyTypeName: BottomDrawerController, Assembly-CSharp
+        m_MethodName: ChangeDrawerHeight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &864109644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4765742745948318181, guid: 63bd331e50606274e8ab5788cefb6c41,
@@ -5318,7 +5330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b4755dca68046448d0c146b741d8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeight: 0
+  upPosition: 250
 --- !u!1 &1850249914
 GameObject:
   m_ObjectHideFlags: 0
@@ -5649,6 +5661,8 @@ MonoBehaviour:
   - {fileID: 1307114275}
   - {fileID: 682666838}
   - {fileID: 733507715}
+  arrowLeftIcon: {fileID: 1018862350}
+  arrowRightIcon: {fileID: 120224618}
   rectTransformLeft: 480
 --- !u!114 &1970734239
 MonoBehaviour:

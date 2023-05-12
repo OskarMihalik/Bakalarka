@@ -7,6 +7,10 @@ public class ControlButtonsController : MonoBehaviour
 {
     public List<Button> controlButtonsTabs = new List<Button>();
 
+    [SerializeField] private GameObject arrowLeftIcon;
+
+    [SerializeField] private GameObject arrowRightIcon;
+
     private Button activeButton;
 
     private float rectStart;
@@ -46,10 +50,13 @@ public class ControlButtonsController : MonoBehaviour
             LeanTween.cancel(gameObject);
             start = rectTransform.offsetMin.x;
         }
+
         LeanTween.value(gameObject, start, rectTransformLeft, .5f).setOnUpdate((value) =>
         {
             rectTransform.offsetMin = new Vector2(value, rectTransform.offsetMin.y);
         });
+        arrowLeftIcon.SetActive(false);
+        arrowRightIcon.SetActive(true);
     }
 
     public void TweenRight()
@@ -65,5 +72,7 @@ public class ControlButtonsController : MonoBehaviour
         {
             rectTransform.offsetMin = new Vector2(value, rectTransform.offsetMin.y);
         });
+        arrowLeftIcon.SetActive(true);
+        arrowRightIcon.SetActive(false);
     }
 }
