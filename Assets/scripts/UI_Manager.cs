@@ -25,6 +25,7 @@ public class UI_Manager : MonoBehaviour
     public Transform connectPanel;
     public Transform alarmsPanel;
     public Transform controllButtonsShower;
+    public Transform reconnectPopUpPanel;
     [Header("Prefabs")]
     public GameObject listItemPrefab;
     public GameObject basicInfoRowPrefab;
@@ -37,8 +38,9 @@ public class UI_Manager : MonoBehaviour
     private void Awake()
     {
         m2MqttManager.ConnectionSucceeded += ConnectionSucceeded;
-        m2MqttManager.ConnectionFailed += OnDisconnect;
         m2MqttManager.ConnectionDisconnected += OnDisconnect;
+        m2MqttManager.ConnectionFailed += OnFailedConnection;
+        m2MqttManager.ConnectionLost += OnFailedConnection;
         CreateManualControlButtons();
         m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
         activeBottomDrawerPanel = connectPanel;
@@ -91,6 +93,13 @@ public class UI_Manager : MonoBehaviour
     {
         ToggleControls(false);
         ToggleConnectPanel();
+    }
+    
+    private void OnFailedConnection()
+    {
+        ToggleControls(false);
+        ToggleConnectPanel();
+        reconnectPopUpPanel.gameObject.SetActive(true);
     }
 
     public void ToggleUI(bool active)

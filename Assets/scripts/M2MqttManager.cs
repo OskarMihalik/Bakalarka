@@ -10,6 +10,11 @@ public class M2MqttManager : M2MqttUnityClient
     private List<StoredMessage> eventMessages = new List<StoredMessage>();
     private Dictionary<string, Action<string>> eventActions = new Dictionary<string, Action<string>>();
 
+    /// <summary>
+    /// Event fired when connection lost
+    /// </summary>
+    public event Action ConnectionLost;
+
     public void PublishPayload(string topic, string payload)
     {
         client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload),
@@ -79,8 +84,8 @@ public class M2MqttManager : M2MqttUnityClient
             new byte[]
             {
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE 
-            }); 
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE
+            });
     }
 
     protected override void UnsubscribeTopics()
@@ -92,6 +97,7 @@ public class M2MqttManager : M2MqttUnityClient
     protected override void OnConnectionFailed(string errorMessage)
     {
         Debug.Log("CONNECTION FAILED! " + errorMessage);
+        ConnectionLost?.Invoke();
     }
 
     protected override void OnDisconnected()
@@ -102,6 +108,7 @@ public class M2MqttManager : M2MqttUnityClient
     protected override void OnConnectionLost()
     {
         Debug.Log("CONNECTION LOST!");
+        ConnectionLost?.Invoke();
     }
 
     private void OnDestroy()
