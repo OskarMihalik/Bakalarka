@@ -151,6 +151,7 @@ public class UI_Manager : MonoBehaviour
 
     private void CreateManualControlButtons()
     {
+        DeleteChildren(manualControlContent);
         foreach (var property in SustavaViews.ControllableKeys)
         {
             var listItem = Instantiate(listItemPrefab, manualControlContent, false);
@@ -172,6 +173,7 @@ public class UI_Manager : MonoBehaviour
 
     private void CreateBasicInfoListItems(string _)
     {
+        DeleteChildren(basicInfoContent);
         foreach (var key in SustavaViews.BasicInfoKeys)
         {
             var basicInfoRow = Instantiate(basicInfoRowPrefab, basicInfoContent, false);
@@ -184,6 +186,7 @@ public class UI_Manager : MonoBehaviour
     
     private void CreateAlarmsInfoListItems()
     {
+        DeleteChildren(alarmsInfoContent);
         foreach (var key in SustavaViews.AlarmsKeys)
         {
             var basicInfoRow = Instantiate(basicInfoRowPrefab, alarmsInfoContent, false);
@@ -191,6 +194,14 @@ public class UI_Manager : MonoBehaviour
             
             basicInfoRowController.title.text = key.ToString().Replace("_", " ");
             basicInfoRowController.SetConverterKey(key);
+        }
+    }
+
+    private void DeleteChildren(Transform parentTransform)
+    {
+        foreach (Transform child in parentTransform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }
