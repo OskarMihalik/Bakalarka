@@ -9,8 +9,9 @@ public class BasicInfoRowController : MonoBehaviour
     public TextMeshProUGUI value;
 
     [SerializeField] private DataBindingConverterDictionary dataBindingConverterDictionary;
-    public void SetConverterKey(SustavaReaderEnumKeys key)
+    public void SetConverterKey(SustavaReaderEnumKeys key, bool negateBool = false)
     {
         dataBindingConverterDictionary.SetNameOfKey(key);
+        dataBindingConverterDictionary.negateBool = negateBool;
     }
 }

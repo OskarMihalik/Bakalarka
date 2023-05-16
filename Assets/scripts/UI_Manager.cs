@@ -189,7 +189,7 @@ public class UI_Manager : MonoBehaviour
             var basicInfoRowController = basicInfoRow.GetComponent<BasicInfoRowController>();
             
             basicInfoRowController.title.text = key.ToString().Replace("_", " ");
-            basicInfoRowController.SetConverterKey(key);
+            basicInfoRowController.SetConverterKey(key, true);
         }
     }
     
