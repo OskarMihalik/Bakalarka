@@ -11,7 +11,6 @@ public class Blinking : MonoBehaviour
         var image = GetComponent<Image>();
         LeanTween.value(gameObject, 1f, 0.3f, 0.5f).setLoopPingPong().setOnUpdate((value) =>
         {
-            Debug.Log(value);
             var newColor = image.color;
             newColor.a = value;
             image.color = newColor;

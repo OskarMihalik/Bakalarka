@@ -11,10 +11,16 @@ public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private M2MqttManager m2MqttManager;
     [SerializeField] private M2MqttPayloads m2MqttPayloads;
-
+    [SerializeField] private ControlButtonsController controlButtonsController;
+    
+    [Header("Buttons")]
+    [SerializeField] private Button basicInfoButton;
+    [SerializeField] private Button manualControlButton;
+    [SerializeField] private Button alarmsInfoButton;
+    
     public Transform canvas;
     public Transform controlButtons;
-    public Transform basicInfoButton;
+
     [Header("Contents")]
     public Transform manualControlContent;
     public Transform basicInfoContent;
@@ -29,7 +35,7 @@ public class UI_Manager : MonoBehaviour
     [Header("Prefabs")]
     public GameObject listItemPrefab;
     public GameObject basicInfoRowPrefab;
-
+    
     private Transform activeBottomDrawerPanel;
     private Transform activeControlButton;
     
@@ -44,7 +50,7 @@ public class UI_Manager : MonoBehaviour
         CreateManualControlButtons();
         m2MqttManager.AddActionToReceivedTopic(Topics.InitializeValues, CreateBasicInfoListItems);
         activeBottomDrawerPanel = connectPanel;
-        activeControlButton = basicInfoButton;
+        controlButtonsController.Activate(basicInfoButton);
     }
 
     private void Start()
@@ -87,6 +93,8 @@ public class UI_Manager : MonoBehaviour
         m2MqttPayloads.InitializeValues();
         ToggleControls(true);
         ToggleBasicInfo();
+        controlButtonsController.Activate(basicInfoButton);
+        m2MqttPayloads.ToggleOnePartInTopic(false, "switch_control", Topics.ManualControl);
     }
     
     private void OnDisconnect()
@@ -115,6 +123,7 @@ public class UI_Manager : MonoBehaviour
     public void ToggleConnectPanel()
     {
         ChangeActiveBottomDrawerPanel(connectPanel);
+        // controlButtonsController.Activate(basicInfoButton);
     }
     
     public void ToggleAlarmsPanel()
@@ -130,7 +139,7 @@ public class UI_Manager : MonoBehaviour
     
     private void ChangeActiveBottomDrawerPanel(Transform newPanel)
     {
-        if (activeBottomDrawerPanel != null && activeControlButton != null)
+        if (activeBottomDrawerPanel != null)
         {
             activeBottomDrawerPanel.gameObject.SetActive(false);
         }

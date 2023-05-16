@@ -34,7 +34,7 @@ public class ControlButtonsController : MonoBehaviour
         rectStart = rectTransform.offsetMin.x;
     }
 
-    private void Activate(Button button)
+    public void Activate(Button button)
     {
         button.interactable = false;
         if (activeButton != null)

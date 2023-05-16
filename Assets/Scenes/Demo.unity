@@ -3286,9 +3286,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m2MqttManager: {fileID: 1012388609}
   m2MqttPayloads: {fileID: 1012388610}
+  controlButtonsController: {fileID: 1970734238}
+  basicInfoButton: {fileID: 1307114275}
+  manualControlButton: {fileID: 682666838}
+  alarmsInfoButton: {fileID: 733507715}
   canvas: {fileID: 4849773}
   controlButtons: {fileID: 1970734235}
-  basicInfoButton: {fileID: 511940231}
   manualControlContent: {fileID: 592789986}
   basicInfoContent: {fileID: 546327844}
   alarmsInfoContent: {fileID: 122663517}
@@ -4385,7 +4388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4165d259ea3a4ba85d057411a760d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brokerAddress: 192.168.0.105
+  brokerAddress: 192.168.1.100
   brokerPort: 1883
   isEncrypted: 0
   certificateName: 
@@ -6352,7 +6355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89cbcb0d97a283e48b14c92518daf08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipScanning: 1
+  skipScanning: 0
   eventsOnScan:
     m_PersistentCalls:
       m_Calls:
